@@ -292,19 +292,16 @@
 ** the libraries, you may want to use the following definition (define
 ** LUA_BUILD_AS_DLL to get it).
 */
+#ifndef PLUTO_C_LINKAGE
+  #define PLUTO_C_LINKAGE true
+#endif
 #if defined(LUA_BUILD_AS_DLL)
-  #ifndef PLUTO_C_LINKAGE
-    #define PLUTO_C_LINKAGE true
-  #endif
   #if defined(LUA_CORE) || defined(LUA_LIB)
     #define PLUTO_DLLSPEC __declspec(dllexport)
   #else
     #define PLUTO_DLLSPEC __declspec(dllimport)
   #endif
 #else
-  #ifndef PLUTO_C_LINKAGE
-    #define PLUTO_C_LINKAGE false
-  #endif
   #ifdef __EMSCRIPTEN__
     #include "emscripten.h"
     #define PLUTO_DLLSPEC EMSCRIPTEN_KEEPALIVE
